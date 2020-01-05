@@ -67,3 +67,19 @@ h1{
     grid-row-start: 5;
     grid-row-end: 5;
 }
+.start {
+    font-size: 20px;
+    display: grid;
+    grid-column-start:4;
+    grid-column-end: 4; 
+    grid-row-start: 5;
+    grid-row-end: 5;
+    align-self: center;
+}
+
+.scoreValue {
+    display: grid;
+    border-top: 5px solid coral;
+    text-align: center;
+    padding-top:10px;
+}
