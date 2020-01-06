@@ -18,18 +18,29 @@
 //if no, user keeps choosing until end of sequence is reached
 //if yes, raise difficulty by adding one more color to the sequence
 
-// target squares
+// target squares, start button, and score
 const greenSquare = document.querySelector(".green");
 const yellowSquare = document.querySelector(".yellow");
 const redSquare = document.querySelector(".red");
 const blueSquare = document.querySelector(".blue");
 const scoreCount = document.querySelector(".scoreCount");
 const start = document.querySelector(".start");
-// keep order of the lights
+const gameOver = document.querySelector('.game-over');
+//score
+let score = scoreCount.textContent = 0;
+//score increment
+function scoreIncrement(){
+    scoreCount.textContent++;
+}
+function scoreZero(){
+    scoreCount.textContent = 0;
+}
+// user input and simon arrays
 let userInput = [];
 let simonArray = [];
 
 //event listeners that push whatever is clicked into the userInput array
+start.addEventListener('click', startGame)
 greenSquare.addEventListener("click", greenPush);
 yellowSquare.addEventListener("click", yellowPush);
 redSquare.addEventListener("click", redPush);
@@ -75,4 +86,57 @@ function litRed() {
 function litBlue() {
   blueSquare.style.boxShadow = "0px 0px 83px 3px rgba(255,0,0,1)";
   setTimeout(turnOffShadow, 300);
+}
+
+//add random number between 1-4 and push to simon array
+function randomGen(){
+    const results = simonArray.push(Math.floor(Math.random() * 4) + 1);
+    console.log(results)
+}
+
+function turn(){
+    //add one to simonArray
+    randomGen();
+    //light up simonArray sequence for user
+    for(let i = 0; i < simonArray.length; i++){
+    setTimeout( function (){
+    if (simonArray[i] === 1) litGreen();
+    
+    if (simonArray[i] === 2) litYellow();
+    
+    if (simonArray[i] === 3) litRed();
+    
+    if (simonArray[i] === 4) litBlue();
+    },600 * i)
+}
+setTimeout(userCheck, (3000 * simonArray.length));
+}  
+//check if userInput === simonArray, if yes, clear userArray, add 1 to "score" and return turn(), if no, return "game over" and clear simonArray
+function userCheck(){
+    for(let i = 0; i < userInput.length; i++){
+     if(userInput[i] === simonArray[i]){
+        console.log('win')
+        scoreIncrement()
+        userInput = []
+        turn();
+    } else {
+        console.log('lost')
+        gameOver.style.display = 'grid';
+        simonArray = []
+    }
+    }
+}
+
+//start button starts the game
+function startGame(){
+    userInput = []
+    simonArray = []
+    scoreZero();
+    turn();    
+    setTimeout(userCheck, 3000)
+    if(gameOver.style.display === 'none') {
+        gameOver.style.display = 'grid';
+    } else {
+        gameOver.style.display = 'none';
+    }
 }
