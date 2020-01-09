@@ -15,8 +15,8 @@
 // target squares, start button, and score
 const greenSquare = document.querySelector(".green");
 const yellowSquare = document.querySelector(".yellow");
-const redSquare = document.querySelector(".red");
-const blueSquare = document.querySelector(".blue");
+const orangeSquare = document.querySelector(".orange");
+const purpleSquare = document.querySelector(".purple");
 const scoreCount = document.querySelector(".scoreCount");
 const start = document.querySelector(".start");
 const gameOver = document.querySelector(".game-over");
@@ -38,10 +38,10 @@ let simonArray = [];
 start.addEventListener("click", startGame);
 greenSquare.addEventListener("click", greenPush);
 yellowSquare.addEventListener("click", yellowPush);
-redSquare.addEventListener("click", redPush);
-blueSquare.addEventListener("click", bluePush);
+orangeSquare.addEventListener("click", orangePush);
+purpleSquare.addEventListener("click", purplePush);
 //functions that push whatever is clicked into the userInput array and checks if the userInput's indexed item matches Simon's indexed item.
-function checkIndex(){
+function checkIndex() {
   if (userInput[userInput.length - 1] === simonArray[userInput.length - 1]) {
     console.log("winnerrrrr!");
   } else {
@@ -61,12 +61,12 @@ function yellowPush() {
   checkIndex();
   checkIfDone();
 }
-function redPush() {
+function orangePush() {
   userInput.push(3);
   checkIndex();
   checkIfDone();
 }
-function bluePush() {
+function purplePush() {
   userInput.push(4);
   checkIndex();
   checkIfDone();
@@ -76,28 +76,28 @@ function bluePush() {
 const turnOffShadow = function() {
   greenSquare.style.boxShadow = "none";
   yellowSquare.style.boxShadow = "none";
-  redSquare.style.boxShadow = "none";
-  blueSquare.style.boxShadow = "none";
+  orangeSquare.style.boxShadow = "none";
+  purpleSquare.style.boxShadow = "none";
 };
 
 //light up boxes
 function litGreen() {
-  greenSquare.style.boxShadow = "0px 0px 83px 20px rgba(3,3,3,1)";
+  greenSquare.style.boxShadow = "0px 0px 83px 20px rgba(249,54,54,1)";
   audio.play();
   setTimeout(turnOffShadow, 300);
 }
 function litYellow() {
-  yellowSquare.style.boxShadow = "0px 0px 83px 20px rgba(3,3,3,1)";
+  yellowSquare.style.boxShadow = "0px 0px 83px 20px rgba(249,54,54,1)";
   audio.play();
   setTimeout(turnOffShadow, 300);
 }
-function litRed() {
-  redSquare.style.boxShadow = "0px 0px 83px 20px rgba(3,3,3,1)";
+function litOrange() {
+  orangeSquare.style.boxShadow = "0px 0px 83px 20px rgba(249,54,54,1)";
   audio.play();
   setTimeout(turnOffShadow, 300);
 }
-function litBlue() {
-  blueSquare.style.boxShadow = "0px 0px 83px 20px rgba(3,3,3,1)";
+function litPurple() {
+  purpleSquare.style.boxShadow = "0px 0px 83px 20px rgba(249,54,54,1)";
   audio.play();
   setTimeout(turnOffShadow, 300);
 }
@@ -118,9 +118,9 @@ function turn() {
 
       if (simonArray[i] === 2) litYellow();
 
-      if (simonArray[i] === 3) litRed();
+      if (simonArray[i] === 3) litOrange();
 
-      if (simonArray[i] === 4) litBlue();
+      if (simonArray[i] === 4) litPurple();
     }, 1000 * i);
   }
 }
@@ -140,6 +140,10 @@ function startGame() {
   simonArray = [];
   scoreZero();
   turn();
+  gameOverScreen();
+}
+
+function gameOverScreen() {
   if (gameOver.style.display === "none") {
     gameOver.style.display = "grid";
   } else {
