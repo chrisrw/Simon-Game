@@ -29,19 +29,26 @@ h1 {
 
 .green {
   display: grid;
-  grid-column-start: 2;
-  grid-column-end: 2;
+  grid-column-start: 3;
+  grid-column-end: 4;
   grid-row-start: 3;
-  grid-row-end: 5;
+  grid-row-end: 3;
   background: #6bf23a;
+  border-radius: 20%;
+  height: 100px;
+  width: 100px;
+        
 }
 .yellow {
   display: grid;
   grid-column-start: 3;
   grid-column-end: 3;
-  grid-row-start: 3;
+  grid-row-start: 4;
   grid-row-end: 5;
   background: yellow;
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
 }
 .red {
   display: grid;
@@ -49,19 +56,36 @@ h1 {
   grid-column-end: 4;
   grid-row-start: 3;
   grid-row-end: 5;
-  background: red;
+      width: 0px;
+      height: 0px;
+      border-right: 60px solid transparent;
+      border-top: 60px solid red;
+      border-left: 60px solid red;
+      border-bottom: 60px solid red;
+      border-top-left-radius: 60px;
+      border-top-right-radius: 60px;
+      border-bottom-left-radius: 60px;
+      border-bottom-right-radius: 60px;
+      /* Pac-Man shape from "https://css-tricks.com/the-shapes-of-css/" */
+ 
 }
 .blue {
   display: grid;
-  grid-column-start: 5;
+  grid-column-start: 4;
   grid-column-end: 5;
-  grid-row-start: 3;
+  grid-row-start: 4;
   grid-row-end: 5;
-  background: blue;
+      display: block;
+      width: 100px;
+      height: 110px;
+      background-color: blue;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      /* Egg shape from "https://css-tricks.com/the-shapes-of-css/" */
 }
+
 .score {
   font-size: 26px;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   display: grid;
   grid-column-start: 3;
