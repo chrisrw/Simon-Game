@@ -43,9 +43,9 @@ purpleSquare.addEventListener("click", purplePush);
 //functions that push whatever is clicked into the userInput array and checks if the userInput's indexed item matches Simon's indexed item.
 function checkIndex() {
   if (userInput[userInput.length - 1] === simonArray[userInput.length - 1]) {
-    console.log("winnerrrrr!");
+    // console.log("winnerrrrr!");
   } else {
-    console.log("loser");
+    // console.log("loser");
     simonArray = [];
     gameOver.style.display = "grid";
     scoreZero();
@@ -105,7 +105,7 @@ function litPurple() {
 //add random number between 1-4 and push to simon array
 function randomGen() {
   const results = simonArray.push(Math.floor(Math.random() * 4) + 1);
-  console.log(results);
+  // console.log(results);
 }
 
 function turn() {
@@ -127,7 +127,7 @@ function turn() {
 
 //check if userInput and simonArray lengths match
 function checkIfDone() {
-  console.log(`User input is: ${userInput}. Simon array is: ${simonArray}`);
+  // console.log(`User input is: ${userInput}. Simon array is: ${simonArray}`);
   if (userInput.length === simonArray.length) {
     userInput = [];
     scoreIncrement();
