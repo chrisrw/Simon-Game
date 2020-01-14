@@ -1,3 +1,4 @@
+// Hou's comment: I'd move lines 2-14 to the readme.
 // As a user, 1) I should be able to start the game play clicking "start"
 //2) As colors light up, I should be able to click them in the order that they lit up.
 //3) If I click the sequence in the correct order, I should gain a point and the difficulty should increase by increasing the sequence length by 1.
@@ -13,15 +14,14 @@
 //if yes, raise difficulty by adding one more color to the sequence
 
 // target squares, start button, and score
-const greenSquare = document.querySelector(".green");
-const yellowSquare = document.querySelector(".yellow");
-const orangeSquare = document.querySelector(".orange");
-const purpleSquare = document.querySelector(".purple");
-const scoreCount = document.querySelector(".scoreCount");
-const start = document.querySelector(".start");
-const gameOver = document.querySelector(".game-over");
-const audio = document.querySelector("#myAudio");
-//score
+const greenSquare = document.querySelector('.green');
+const yellowSquare = document.querySelector('.yellow');
+const orangeSquare = document.querySelector('.orange');
+const purpleSquare = document.querySelector('.purple');
+const scoreCount = document.querySelector('.scoreCount');
+const start = document.querySelector('.start');
+const gameOver = document.querySelector('.game-over');
+const audio = document.querySelector('#myAudio');
 let score = (scoreCount.textContent = 0);
 //score increment
 function scoreIncrement() {
@@ -35,77 +35,57 @@ let userInput = [];
 let simonArray = [];
 
 //event listeners that push whatever is clicked into the userInput array
-start.addEventListener("click", startGame);
-greenSquare.addEventListener("click", greenPush);
-yellowSquare.addEventListener("click", yellowPush);
-orangeSquare.addEventListener("click", orangePush);
-purpleSquare.addEventListener("click", purplePush);
+start.addEventListener('click', startGame);
+
+// how would you use event propagation to refactor lines 41-44?
+greenSquare.addEventListener('click', () => push(1));
+yellowSquare.addEventListener('click', () => push(2));
+orangeSquare.addEventListener('click', () => push(3));
+purpleSquare.addEventListener('click', () => push(4));
 //functions that push whatever is clicked into the userInput array and checks if the userInput's indexed item matches Simon's indexed item.
 function checkIndex() {
-  if (userInput[userInput.length - 1] === simonArray[userInput.length - 1]) {
-    // console.log("winnerrrrr!");
-  } else {
-    // console.log("loser");
+  if (userInput[userInput.length - 1] !== simonArray[userInput.length - 1]) {
     simonArray = [];
-    gameOver.style.display = "grid";
+    gameOver.style.display = 'grid';
     scoreZero();
   }
 }
-function greenPush() {
-  userInput.push(1);
-  checkIndex();
-  checkIfDone();
-}
-function yellowPush() {
-  userInput.push(2);
-  checkIndex();
-  checkIfDone();
-}
-function orangePush() {
-  userInput.push(3);
-  checkIndex();
-  checkIfDone();
-}
-function purplePush() {
-  userInput.push(4);
+
+function push(num) {
+  userInput.push(num);
   checkIndex();
   checkIfDone();
 }
 
 //turns off box shadows
 const turnOffShadow = function() {
-  greenSquare.style.boxShadow = "none";
-  yellowSquare.style.boxShadow = "none";
-  orangeSquare.style.boxShadow = "none";
-  purpleSquare.style.boxShadow = "none";
+  const squares = [greenSquare, yellowSquare, orangeSquare, purpleSquare];
+  squares.forEach(square => {
+    square.style.boxShadow = 'none';
+  });
 };
 
 //light up boxes
-function litGreen() {
-  greenSquare.style.boxShadow = "0px 0px 83px 20px rgba(249,54,54,1)";
-  audio.play();
-  setTimeout(turnOffShadow, 300);
-}
-function litYellow() {
-  yellowSquare.style.boxShadow = "0px 0px 83px 20px rgba(249,54,54,1)";
-  audio.play();
-  setTimeout(turnOffShadow, 300);
-}
-function litOrange() {
-  orangeSquare.style.boxShadow = "0px 0px 83px 20px rgba(249,54,54,1)";
-  audio.play();
-  setTimeout(turnOffShadow, 300);
-}
-function litPurple() {
-  purpleSquare.style.boxShadow = "0px 0px 83px 20px rgba(249,54,54,1)";
-  audio.play();
-  setTimeout(turnOffShadow, 300);
+function lightBox(boxNumber) {
+  let box;
+  if (boxNumber === 1) box = greenSquare;
+
+  if (boxNumber === 2) box = yellowSquare;
+
+  if (boxNumber === 3) box = orangeSquare;
+
+  if (boxNumber === 4) box = purpleSquare;
+
+  if (box) {
+    box.style.boxShadow = '0px 0px 83px 20px rgba(249,54,54,1)';
+    audio.play();
+    setTimeout(turnOffShadow, 300);
+  }
 }
 
 //add random number between 1-4 and push to simon array
 function randomGen() {
   const results = simonArray.push(Math.floor(Math.random() * 4) + 1);
-  // console.log(results);
 }
 
 function turn() {
@@ -114,20 +94,13 @@ function turn() {
   //light up simonArray sequence for user
   for (let i = 0; i < simonArray.length; i++) {
     setTimeout(function() {
-      if (simonArray[i] === 1) litGreen();
-
-      if (simonArray[i] === 2) litYellow();
-
-      if (simonArray[i] === 3) litOrange();
-
-      if (simonArray[i] === 4) litPurple();
+      lightBox(simonArray[i]);
     }, 1000 * i);
   }
 }
 
 //check if userInput and simonArray lengths match
 function checkIfDone() {
-  // console.log(`User input is: ${userInput}. Simon array is: ${simonArray}`);
   if (userInput.length === simonArray.length) {
     userInput = [];
     scoreIncrement();
@@ -144,9 +117,9 @@ function startGame() {
 }
 
 function gameOverScreen() {
-  if (gameOver.style.display === "none") {
-    gameOver.style.display = "grid";
+  if (gameOver.style.display === 'none') {
+    gameOver.style.display = 'grid';
   } else {
-    gameOver.style.display = "none";
+    gameOver.style.display = 'none';
   }
 }

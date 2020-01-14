@@ -26,6 +26,7 @@ h1 {
   justify-content: center;
   align-items: center;
   padding-top: 10px;
+  /* To be consistent, I'd just stick with using px throughout your stylesheet since this is the most prevalent sizing format used in this file. You could use media queries to handle different display widths */
   margin: 1.4em 2em;
   display: grid;
   grid-column-start: 1;
@@ -35,7 +36,7 @@ h1 {
   color: #ff7b0f;
   border-bottom: 5px solid #ff7930;
   font-size: 5em;
-  font-family: "Creepster", cursive;
+  font-family: 'Creepster', cursive;
 }
 
 .green {
